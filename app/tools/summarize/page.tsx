@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { BiCheck } from 'react-icons/bi';
 import { BsClipboard2 } from 'react-icons/bs';
 
+type SummaryLength = 'short' | 'medium' | 'detailed';
 export default function SummarizerPage() {
 	const [inputText, setInputText] = useState('');
 	const [outputText, setOutputText] = useState('');
 	const [loading, setLoading] = useState(false);
-	const [summaryLength, setSummaryLength] = useState('short');
+	const [summaryLength, setSummaryLength] = useState<SummaryLength>('short');
 	const [copied, setCopied] = useState(false);
 
 	// Function to handle AI summarization
@@ -73,10 +74,10 @@ export default function SummarizerPage() {
 
 				{/* Summary Options */}
 				<div className="mt-4 flex justify-center gap-4">
-					{['short', 'medium', 'detailed'].map((length) => (
+					{['short', 'medium', 'detailed'].map((length: string) => (
 						<button
 							key={length}
-							onClick={() => setSummaryLength(length)}
+							onClick={() => setSummaryLength(length as SummaryLength)}
 							className={`px-4 py-2 rounded-lg transition ${
 								summaryLength === length
 									? 'bg-blue-500 text-white'
